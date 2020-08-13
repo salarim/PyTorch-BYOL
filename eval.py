@@ -54,10 +54,10 @@ def main():
 
     config = yaml.load(open("config/config.yaml", "r"), Loader=yaml.FullLoader)
 
-    train_dataset = datasets.STL10('datasets', split='train', download=False,
+    train_dataset = datasets.STL10('datasets', split='train', download=True,
                                            transform=data_transforms)
 
-    test_dataset = datasets.STL10('datasets', split='test', download=False,
+    test_dataset = datasets.STL10('datasets', split='test', download=True,
                                            transform=data_transforms)
 
     train_loader = DataLoader(train_dataset, batch_size=batch_size,
@@ -73,7 +73,7 @@ def main():
     
 
     #load pre-trained parameters
-    load_params = torch.load(os.path.join('/home/thalles/PycharmProjects/PyTorch-BYOL/runs/resnet-18_80-epochs/checkpoints/model.pth'),
+    load_params = torch.load(os.path.join('runs/*/checkpoints/model.pth'),
                                      map_location=torch.device(torch.device(device)))
 
     if 'online_network_state_dict' in load_params:

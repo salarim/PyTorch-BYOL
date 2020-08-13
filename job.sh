@@ -13,7 +13,7 @@
 cd $SLURM_TMPDIR
 cp -r ~/scratch/PyTorch-BYOL .
 cd PyTorch-BYOL
-rm -r save
+rm -r runs
 
 module load python/3.7 cuda/10.0
 virtualenv --no-download venv
