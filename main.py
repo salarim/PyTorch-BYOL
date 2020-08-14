@@ -21,7 +21,7 @@ def main():
 
     data_transform = get_simclr_data_transforms(**config['data_transforms'])
 
-    train_dataset = datasets.STL10('datasets', split='train+unlabeled', download=True,
+    train_dataset = datasets.CIFAR10('datasets', train=True, download=True,
                                    transform=MultiViewDataInjector([data_transform, data_transform]))
 
     # online network

@@ -1,3 +1,4 @@
+import argparse
 import torch
 import sys
 import yaml
@@ -49,15 +50,19 @@ def create_data_loaders_from_arrays(X_train, y_train, X_test, y_test):
 
 
 def main():
+    parser = argparse.ArgumentParser('argument for training')
+    parser.add_argument('--model-path', type=str, default='')
+    opt = parser.parse_args()
+
     batch_size = 512
     data_transforms = torchvision.transforms.Compose([transforms.ToTensor()])
 
     config = yaml.load(open("config/config.yaml", "r"), Loader=yaml.FullLoader)
 
-    train_dataset = datasets.STL10('datasets', split='train', download=True,
+    train_dataset = datasets.CIFAR10('datasets', train=True, download=True,
                                            transform=data_transforms)
 
-    test_dataset = datasets.STL10('datasets', split='test', download=True,
+    test_dataset = datasets.CIFAR10('datasets', train=False, download=True,
                                            transform=data_transforms)
 
     train_loader = DataLoader(train_dataset, batch_size=batch_size,
@@ -73,8 +78,7 @@ def main():
     
 
     #load pre-trained parameters
-    load_params = torch.load(os.path.join('runs/*/checkpoints/model.pth'),
-                                     map_location=torch.device(torch.device(device)))
+    load_params = torch.load(opt.model_path, map_location=torch.device(torch.device(device)))
 
     if 'online_network_state_dict' in load_params:
         encoder.load_state_dict(load_params['online_network_state_dict'])

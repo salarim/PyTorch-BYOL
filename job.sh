@@ -2,10 +2,10 @@
 #SBATCH --mail-user=salari.m1375@gmail.com
 #SBATCH --mail-type=ALL
 #SBATCH --account=def-mori_gpu
-#SBATCH --job-name=BYOL-STL10
+#SBATCH --job-name=BYOL-cifar10
 #SBATCH --output=%x-%j.out
 #SBATCH --ntasks=1
-#SBATCH --time=11:59:00
+#SBATCH --time=2:59:00
 #SBATCH --mem=10000M
 #SBATCH --gres=gpu:v100l:1
 #SBATCH --cpus-per-task=16
@@ -22,6 +22,8 @@ pip install --no-index --upgrade pip
 pip install --no-index -r requirements.txt
 
 python main.py
+
+python eval.py --model-path runs/*/checkpoints/model.pth
 
 cp -r runs ~/scratch/PyTorch-BYOL
 
