@@ -2,7 +2,7 @@
 #SBATCH --mail-user=salari.m1375@gmail.com
 #SBATCH --mail-type=ALL
 #SBATCH --account=def-mori_gpu
-#SBATCH --job-name=BYOL-cifar10
+#SBATCH --job-name=BYOL-cifar10-m0.99-lr0.03
 #SBATCH --output=%x-%j.out
 #SBATCH --ntasks=1
 #SBATCH --time=2:59:00

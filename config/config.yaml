@@ -9,12 +9,12 @@ network:
     projection_size: 128
 
 data_transforms:
-  s: 1
+  s: 0.5
   input_shape: (32,32,3)
 
 trainer:
   batch_size: 1024
-  m: 0.996 # momentum update
+  m: 0.99 # momentum update
   checkpoint_interval: 5000
   max_epochs: 40
   num_workers: 4
