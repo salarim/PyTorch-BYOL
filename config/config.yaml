@@ -5,22 +5,22 @@ network:
   fine_tune_from: 'resnet-18_40-epochs'
 
   projection_head:
-    mlp_hidden_size: 512
-    projection_size: 128
+    mlp_hidden_size: 4096
+    projection_size: 256
 
 data_transforms:
-  s: 0.5
+  s: 1
   input_shape: (32,32,3)
 
 trainer:
-  batch_size: 1024
+  batch_size: 192
   m: 0.99 # momentum update
   checkpoint_interval: 5000
-  max_epochs: 40
-  num_workers: 4
+  max_epochs: 100
+  num_workers: 16
 
 optimizer:
   params:
     lr: 0.03
     momentum: 0.9
-    weight_decay: 0.0004
+    weight_decay: 0.0001
